@@ -1,4 +1,4 @@
-package com.itau.transacoes;
+package com.itau.transacoes.dto;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;

@@ -1,12 +1,14 @@
-package com.itau.transacoes.transacaoService;
+package com.itau.transacoes.service;
 
-import com.itau.transacoes.TransacaoDTO;
+import org.springframework.stereotype.Service;
 
+import com.itau.transacoes.dto.TransacaoDTO;
+
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 
 @Service
 public class TransacaoService {
@@ -22,12 +24,12 @@ public class TransacaoService {
         }
 
         // valor negativo
-        if (transacao.getValor().compareTo(java.math.BigDecimal.ZERO) < 0) {
+        if (transacao.getValor().compareTo(BigDecimal.ZERO) < 0) {
             return false;
         }
 
         transacoes.add(transacao);
-        transacoes.clear();
+            return true;
 
     }
 
