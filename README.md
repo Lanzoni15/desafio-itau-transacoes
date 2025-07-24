@@ -73,4 +73,4 @@ cd seurepositorio
 http://localhost:8080/transacoes
 ```
 ## 📞 Contato
-Arthur Lanzoni — LinkedIn — seuemail@exemplo.com
+Arthur Lanzoni — arthurlanzoni08@gmail.com
