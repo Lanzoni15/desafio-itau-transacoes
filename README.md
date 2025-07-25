@@ -1,94 +1,118 @@
-## **Desafio de Programação Itaú Unibanco 🚀**
+🚀 Desafio Itaú – Microsserviço de Transações
+---------------------------------------------
 
-Este projeto é uma API REST desenvolvida como parte do desafio técnico proposto pelo Itaú Unibanco. O objetivo é avaliar a capacidade de construir um software bem estruturado, funcional e de alta qualidade utilizando Java e Spring Boot.
+Este projeto foi desenvolvido como solução para o desafio técnico da vaga **Java Júnior - Itaú**, com o objetivo de construir um microsserviço para controle e análise de transações financeiras por cliente.
 
-**Objetivo:** Criar uma API REST que recebe transações financeiras, calcula e retorna estatísticas com base nas transações recebidas, seguindo boas práticas de desenvolvimento, testes automatizados e organização do código. A aplicação deve atender às restrições técnicas propostas, como não utilizar banco de dados ou cache externos.
+### 🛠 Tecnologias Utilizadas
 
-## **Requisitos do Desafio:**
-
-*   Projeto hospedado em repositório público (GitHub ou GitLab).
+*   **Java 17**
     
-*   Não utilizar forks.
+*   **Spring Boot 3**
     
-*   Pelo menos 3 commits (um para cada endpoint).
+*   **Spring Data JPA**
     
-*   Nomes e padrões dos endpoints exatamente conforme especificação.
+*   **H2 Database (em memória)**
     
-*   Comunicação exclusivamente via JSON.
+*   **Swagger/OpenAPI**
     
-*   Armazenamento em memória (sem banco de dados ou cache externo).
-    
-*   Validação das regras de negócio.
-    
-*   Retorno dos status HTTP apropriados.
+*   **Maven**
     
 
-## **Endpoints Implementados:**
+### 📦 Funcionalidades Implementadas
 
-POST /transacao  
-Recebe uma transação no formato JSON com os campos `valor` (maior ou igual a zero) e `dataHora` (não pode estar no futuro). Ambos são obrigatórios.  
-Respostas esperadas:
-
-*   201 Created: Transação aceita.
+*   ✅ Cadastro de transações financeiras
     
-*   422 Unprocessable Entity: Dados inválidos.
+*   ✅ Consulta de transações por clientId
     
-*   400 Bad Request: JSON mal formatado.
+*   ✅ Resumo das transações de um cliente:
     
-
-DELETE /transacao  
-Remove todas as transações armazenadas.  
-Resposta esperada:
-
-*   200 OK: Transações removidas com sucesso.
+    *   Quantidade de transações
+        
+    *   Valor total
+        
+    *   Valor médio
+        
+    *   Maior e menor valor
+        
+*   ✅ Documentação automática com Swagger
     
-
-GET /estatistica  
-Retorna as estatísticas das transações feitas nos últimos 60 segundos (count, sum, avg, min e max).  
-Se não houver transações, retorna todos os valores como zero.  
-Resposta esperada:
-
-*   200 OK: Retorno com estatísticas atualizadas.
+*   ✅ Banco de dados em memória (H2) para testes simples e rápidos
     
 
-## **Tecnologias Utilizadas:**
+### 🧪 Como Rodar Localmente
 
-*   Java 17
-    
-*   Spring Boot 3
-    
-*   Maven
-    
-*   JUnit 5 + MockMvc
-    
-*   Swagger/OpenAPI
-    
+1.  **Clone o repositório:**
 
-## **Como Executar o Projeto:**
+```
+git clone https://github.com/Lanzoni15/desafio-itau-transacoes.git cd desafio-itau-transacoes
+```
 
-1.  Clone o repositório: git clone [https://github.com/Lanzoni15/desafio-itau-transacoes.git](https://github.com/Lanzoni15/desafio-itau-transacoes.git)
+1.  **Compile o projeto com Maven:**
     
-2.  Acesse a pasta do projeto: cd desafio-itau-transacoes
-    
-3.  Execute a aplicação: ./mvnw spring-boot:run
-    
+```
+/mvnw clean install 
+```
 
-A API estará disponível em: [http://localhost:8080](http://localhost:8080)
+1.  **Execute a aplicação:**
 
-**Como Executar os Testes:**  
-Execute o comando ./mvnw test para rodar todos os testes automatizados. Eles cobrem os endpoints e as regras de negócio, garantindo o correto funcionamento da aplicação.
-
-## **Observações:**
-
-*   Nenhuma persistência externa é utilizada; os dados são armazenados apenas em memória.
-    
-*   Todas as transações são perdidas ao reiniciar a aplicação.
-    
-*   Certifique-se de enviar requisições no formato correto para evitar erros de validação.
-
-## 🔗 Projeto Base do Desafio:
-Este projeto foi desenvolvido com base no repositório oficial disponibilizado pelo Itaú Unibanco para a vaga Júnior 99:
-➡️ https://github.com/rafaellins-itau/desafio-itau-vaga-99-junior
+```
+/mvnw spring-boot:run
+```
+1.  **Acesse os endpoints:**
     
 
-## **Autor:** Arthur Lanzoni
+*   Swagger UI: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+    
+*   Console do banco H2: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
+    
+    *   JDBC URL: jdbc:h2:mem:desafioitau
+        
+    *   User: sa | Password: _(vazio)_
+        
+
+### 📌 Exemplos de Requisição
+
+#### 🔹 Cadastro de transação
+
+POST /api/transacoes
+```
+{    
+"clientId": 123,
+"valor": 250.75  
+}
+```
+
+#### 🔹 Buscar transações por cliente
+
+GET /api/transacoes/123
+
+#### 🔹 Obter resumo por cliente
+
+GET /api/transacoes/resumo/123
+
+### 📁 Estrutura do Projeto
+
+src/  <br>
+├── main/ <br>
+├── java/com/itau/transacoes  <br>
+├── controller  <br>
+├── model  <br>
+├── repository  <br>
+│   └── service <br> 
+│   └── resources/<br> 
+│   └── application.properties<br>
+
+
+📎 Observações
+
+*   Este projeto foi desenvolvido com foco didático e demonstração de habilidades técnicas.
+    
+*   Pode ser facilmente adaptado para uso com bancos de dados como MySQL ou PostgreSQL.
+    
+
+![Java](https://img.shields.io/badge/Java-17-blue)  <br>
+![SpringBoot](https://img.shields.io/badge/SpringBoot-3.0-brightgreen)  <br>
+
+### 👨‍💻 Autor
+
+**Arthur Lanzoni**
