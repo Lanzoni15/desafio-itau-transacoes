@@ -1,54 +1,47 @@
-package com.itau.transacoes.Controller;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+package com.itau.transacoes.controller;
 
 import com.itau.transacoes.dto.EstatisticaDTO;
 import com.itau.transacoes.dto.TransacaoDTO;
 import com.itau.transacoes.service.TransacaoService;
-
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/transacoes")
+@RequestMapping("/transacao")
 public class TransacaoController {
 
-    @Autowired
-    private TransacaoService transacaoService;
+    private final TransacaoService transacaoService;
 
-    // POST
+    public TransacaoController(TransacaoService transacaoService) {
+        this.transacaoService = transacaoService;
+    }
+
+    @Operation(summary = "Adiciona uma nova transação")
     @PostMapping
-    public ResponseEntity<String> adicionarTransacao(@Valid @RequestBody TransacaoDTO transacao) {
+    public ResponseEntity<Void> adicionarTransacao(@Valid @RequestBody TransacaoDTO transacao) {
         boolean sucesso = transacaoService.adicionarTransacao(transacao);
 
         if (sucesso) {
-            return ResponseEntity.status(201).body("Transação adicionada com sucesso.");
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } else {
-            return ResponseEntity.badRequest().body("Transação inválida (data futura ou valor negativo).");
+            return ResponseEntity.unprocessableEntity().build();
         }
     }
 
-    // GET
+    @Operation(summary = "Retorna estatísticas das transações dos últimos 60 segundos")
     @GetMapping("/estatistica")
     public ResponseEntity<EstatisticaDTO> buscarEstatistica() {
         EstatisticaDTO estatistica = transacaoService.calcularEstatisticas();
         return ResponseEntity.ok(estatistica);
     }
 
-    // DELETE
-
+    @Operation(summary = "Remove todas as transações")
     @DeleteMapping
     public ResponseEntity<Void> limparTransacoes() {
         transacaoService.limparTransacoes();
         return ResponseEntity.ok().build();
     }
-
 }

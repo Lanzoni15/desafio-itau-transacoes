@@ -2,22 +2,22 @@ package com.itau.transacoes.dto;
 
 import java.math.BigDecimal;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class EstatisticaDTO {
 
-    private long count;
-    private BigDecimal sum;
-    private BigDecimal avg;
-    private BigDecimal min;
-    private BigDecimal max;
+    private final long count;
+    private final BigDecimal sum;
+    private final BigDecimal avg;
+    private final BigDecimal min;
+    private final BigDecimal max;
 
-    // Getters
+    public EstatisticaDTO(long count, BigDecimal sum, BigDecimal avg, BigDecimal min, BigDecimal max) {
+        this.count = count;
+        this.sum = sum;
+        this.avg = avg;
+        this.min = min;
+        this.max = max;
+    }
+
     public long getCount() {
         return count;
     }
@@ -37,26 +37,4 @@ public class EstatisticaDTO {
     public BigDecimal getMax() {
         return max;
     }
-
-    // Setters
-    public void setCount(long count) {
-        this.count = count;
-    }
-
-    public void setSum(BigDecimal sum) {
-        this.sum = sum;
-    }
-
-    public void setAvg(BigDecimal avg) {
-        this.avg = avg;
-    }
-
-    public void setMin(BigDecimal min) {
-        this.min = min;
-    }
-
-    public void setMax(BigDecimal max) {
-        this.max = max;
-    }
-
 }
