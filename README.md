@@ -85,6 +85,10 @@ Execute o comando ./mvnw test para rodar todos os testes automatizados. Eles cob
 *   Todas as transações são perdidas ao reiniciar a aplicação.
     
 *   Certifique-se de enviar requisições no formato correto para evitar erros de validação.
+
+## 🔗 Projeto Base do Desafio:
+Este projeto foi desenvolvido com base no repositório oficial disponibilizado pelo Itaú Unibanco para a vaga Júnior 99:
+➡️ https://github.com/rafaellins-itau/desafio-itau-vaga-99-junior
     
 
 ## **Autor:** Arthur Lanzoni
