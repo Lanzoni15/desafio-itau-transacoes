@@ -1,113 +1,109 @@
-🚀 Desafio Itaú – Microsserviço de Transações
----------------------------------------------
+# 💳 Desafio Itaú – Controle de Transações
 
-Este projeto foi desenvolvido como solução para o desafio técnico da vaga **Java Júnior - Itaú**, com o objetivo de construir um microsserviço para controle e análise de transações financeiras por cliente.
+Sistema back-end para controle e análise de transações financeiras, desenvolvido como parte de um desafio técnico da vaga de estágio do Itaú.
 
-### 🛠 Tecnologias Utilizadas
+---
 
-*   **Java 17**
-    
-*   **Spring Boot 3**
-    
-*   **Spring Data JPA**
-   
-*   **Swagger/OpenAPI**
-    
-*   **Maven**
-    
+## 🚀 Tecnologias Utilizadas
 
-### 📦 Funcionalidades Implementadas
+- Java 17
+- Spring Boot
+- Spring Web
+- Spring Data JPA
+- MySQL (desenvolvimento)
+- H2 (testes locais)
+- Maven
+- Lombok
 
-*   ✅ Cadastro de transações financeiras
-    
-*   ✅ Consulta de transações por clientId
-    
-*   ✅ Resumo das transações de um cliente:
-    
-    *   Quantidade de transações
-        
-    *   Valor total
-        
-    *   Valor médio
-        
-    *   Maior e menor valor
-        
-*   ✅ Documentação automática com Swagger
-    
-*   ✅ Banco de dados em memória para testes simples e rápidos
-    
+---
 
-### 🧪 Como Rodar Localmente
+## ⚙️ Funcionalidades
 
-1.  **Clone o repositório:**
+- Cadastro de novas transações
+- Consulta de todas as transações por ID do usuário
+- Cálculo de estatísticas: soma, média, quantidade, maior e menor transação
+- Respostas JSON organizadas e informativas
+- Banco de dados MySQL com estrutura relacional
+- Possibilidade de migrar para banco em memória (H2) para testes
 
-```
-git clone https://github.com/Lanzoni15/desafio-itau-transacoes.git cd desafio-itau-transacoes
-```
+---
 
-1.  **Compile o projeto com Maven:**
-    
-```
-/mvnw clean install 
-```
+## 📂 Estrutura da API
 
-1.  **Execute a aplicação:**
+src <br>
+├── controller <br>
+│ └── TransacaoController.java <br>
+├── dto <br>
+│ └── TransacaoDTO.java <br>
+├── entity <br>
+│ └── Transacao.java <br>
+├── repository <br>
+│ └── TransacaoRepository.java <br>
+├── service <br>
+│ └── TransacaoService.java <br>
+└── application.properties <br>
 
-```
-/mvnw spring-boot:run
-```
-1.  **Acesse os endpoints:**
-    
 
-*   Swagger UI: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-        
-    *   JDBC URL: jdbc:h2:mem:desafioitau
-        
-    *   User: sa | Password: _(vazio)_
-        
-### 📌 Exemplos de Requisição
+---
 
-#### 🔹 Cadastro de transação
+## 🧪 Endpoints
 
-POST /api/transacoes
-```
-{    
-"clientId": 123,
-"valor": 250.75  
+### 🔸 POST `/transacoes`
+Cadastrar nova transação.
+
+```json
+{
+  "idUsuario": 1,
+  "valor": 150.75
 }
 ```
 
-#### 🔹 Buscar transações por cliente
+### 🔸 GET /transacoes/{idUsuario}
+Listar todas as transações de um usuário.
 
-GET /api/transacoes/123
+### 🔸 GET /transacoes/estatisticas/{idUsuario}
+Retorna:
 
-#### 🔹 Obter resumo por cliente
+- media
+- soma
+- quantidade
+- maior valor
+- menor valor
 
-GET /api/transacoes/resumo/123
+### ▶️ Como rodar o projeto localmente
+1. Clone o repositório:
+```
+git clone https://github.com/Lanzoni15/desafio-itau-transacoes.git
+cd desafio-itau-transacoes
+```
 
-### 📁 Estrutura do Projeto
+2. Configure o banco:
 
-src/  <br>
-├── main/ <br>
-├── java/com/itau/transacoes  <br>
-├── controller  <br>
-├── model  <br>
-├── repository  <br>
-│   └── service <br> 
-│   └── resources/<br> 
-│   └── application.properties<br>
+- Altere as credenciais no application.properties
+- Ou mude para H2 (exemplo já no código)
 
+3. Execute o projeto:
+```
+./mvnw spring-boot:run
+```
 
-📎 Observações
+### 🔍 Exemplo de resposta /estatisticas/1
 
-*   Este projeto foi desenvolvido com foco didático e demonstração de habilidades técnicas.
-    
-*   Pode ser facilmente adaptado para uso com bancos de dados como MySQL ou PostgreSQL.
-    
+```
+{
+  "media": 102.58,
+  "soma": 512.9,
+  "quantidade": 5,
+  "maiorValor": 150.75,
+  "menorValor": 50.00
+}
+```
 
-![Java](https://img.shields.io/badge/Java-17-blue)  <br>
-![SpringBoot](https://img.shields.io/badge/SpringBoot-3.0-brightgreen)  <br>
+### 📌 Observações
+<b> Este projeto foi desenvolvido em ambiente de estudo e avaliação técnica. Caso tenha sugestões de melhoria ou queira entrar em contato, fique à vontade! <b>
 
-### 👨‍💻 Autor
-
-**Arthur Lanzoni**
+### 👨‍💻 Desenvolvido por
+<b> Arthur Lanzoni <b> <br>
+📍 São Paulo - SP <br>
+🔗 GitHub: @Lanzoni15 <br>
+🔗 LinkedIn: https://www.linkedin.com/in/arthur-lanzoni-a838b721a/
