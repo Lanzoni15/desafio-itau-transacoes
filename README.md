@@ -36,7 +36,7 @@ Este projeto foi desenvolvido como solução para o desafio técnico da vaga **J
         
 *   ✅ Documentação automática com Swagger
     
-*   ✅ Banco de dados em memória (H2) para testes simples e rápidos
+*   ✅ Banco de dados em memória para testes simples e rápidos
     
 
 ### 🧪 Como Rodar Localmente
