@@ -10,9 +10,7 @@ Este projeto foi desenvolvido como solução para o desafio técnico da vaga **J
 *   **Spring Boot 3**
     
 *   **Spring Data JPA**
-    
-*   **H2 Database (em memória)**
-    
+   
 *   **Swagger/OpenAPI**
     
 *   **Maven**
@@ -62,14 +60,11 @@ git clone https://github.com/Lanzoni15/desafio-itau-transacoes.git cd desafio-it
     
 
 *   Swagger UI: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-    
-*   Console do banco H2: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
-    
+        
     *   JDBC URL: jdbc:h2:mem:desafioitau
         
     *   User: sa | Password: _(vazio)_
         
-
 ### 📌 Exemplos de Requisição
 
 #### 🔹 Cadastro de transação
